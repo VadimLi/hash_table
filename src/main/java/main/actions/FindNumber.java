@@ -1,27 +1,27 @@
-package main;
+package main.actions;
 
 
 import main.factory.Action;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class FindNumber implements Action {
 
+    private static final String NOT_FOUND = "not found";
+
     private List<String> listNames;
 
     private boolean checkFind;
 
-    public FindNumber() {
-        listNames = new ArrayList<>();
+    public FindNumber(final List<String> listNames) {
+        this.listNames = listNames;
     }
 
     @Override
-    public void doAction(String number,
-                         String name,
+    public void doAction(final String number,
+                         final String name,
                          final Map<String, String> listNumbers) {
-        number = in.next();
         checkFind = false;
         for (final Map.Entry<String, String> findName : listNumbers.entrySet()) {
             if (findName.getKey().equals(number)) {
@@ -31,7 +31,8 @@ public class FindNumber implements Action {
             }
         }
         if (!checkFind)
-            listNames.add(name);
+            listNames.add(NOT_FOUND);
     }
+
 
 }

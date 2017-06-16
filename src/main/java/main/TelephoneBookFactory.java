@@ -1,6 +1,12 @@
 package main;
 
+import main.actions.AddNumber;
+import main.actions.DeleteNumber;
+import main.actions.FindNumber;
 import main.factory.Action;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TelephoneBookFactory {
 
@@ -10,15 +16,25 @@ public class TelephoneBookFactory {
 
     private static final String FIND_NUMBER = "find";
 
-    public Action getAction(final String action) {
+    private List<String> listNames;
 
+    public TelephoneBookFactory() {
+        listNames = new ArrayList<>();
+    }
+
+    public Action getAction(final String action) {
         switch (action) {
             case ADD_NUMBER : return new AddNumber();
             case DEL_NUMBER : return new DeleteNumber();
-            case FIND_NUMBER : return new FindNumber();
-            default: throw new IllegalArgumentException("Не верная фигура. Фигура должна быть 'Rect' или 'Circle' !");
+            case FIND_NUMBER : return new FindNumber(listNames);
+            default: throw new IllegalArgumentException("!");
         }
+    }
 
+    public void writeNumbers() {
+        for (final String name : listNames) {
+            System.out.println(name);
+        }
     }
 
 }
